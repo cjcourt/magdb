@@ -1,4 +1,3 @@
-import time
 from database import MagnetismDatabase
 
 corpus = '//home/cdt1606/Desktop/Work/Data/XML/curie/'

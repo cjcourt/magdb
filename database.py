@@ -3,7 +3,7 @@
  Database.py
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-XLSX database generator for properties extracted by chemdataextractor
+MongoDB database generator for properties extracted by chemdataextractor-snowball
 
 :copyright: Copyright 2017 by Callum Court.
 :license: MIT, see LICENSE file for more details.
