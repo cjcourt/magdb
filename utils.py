@@ -5,12 +5,12 @@
 
 Utility functions for database creation
 """
-from chemdataextractor.doc import Document
-from chemdataextractor.scrape import Selector
-from chemdataextractor.scrape.pub.acs import AcsHtmlDocument
-from chemdataextractor.scrape.pub.rsc import RscHtmlDocument
-from chemdataextractor.scrape.pub.elsevier import ElsevierHtmlDocument, ElsevierXmlDocument
-from chemdataextractor.scrape.pub.springer import SpringerHtmlDocument
+from chemdataextractor-snowball.doc import Document
+from chemdataextractor-snowball.scrape import Selector
+from chemdataextractor-snowball.scrape.pub.acs import AcsHtmlDocument
+from chemdataextractor-snowball.scrape.pub.rsc import RscHtmlDocument
+from chemdataextractor-snowball.scrape.pub.elsevier import ElsevierHtmlDocument, ElsevierXmlDocument
+from chemdataextractor-snowball.scrape.pub.springer import SpringerHtmlDocument
 import re
 import os
 import sys
