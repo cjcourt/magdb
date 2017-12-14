@@ -6,8 +6,8 @@
 MongoDB database generator for properties extracted by chemdataextractor-snowball
 
 """
-from record import NeelTemperature, CurieTemperature
-from utils import exists, get_chemical_records, get_document_info
+from .record import NeelTemperature, CurieTemperature
+from .utils import exists, get_chemical_records, get_document_info
 from pymongo import MongoClient
 import os
 import traceback
