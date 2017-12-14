@@ -8,7 +8,7 @@ All records must derive from BaseRecord and consist of a method records that ext
 CDE-snowball Compound entity
 
 """
-from utils import normalise_temperature
+from .utils import normalise_temperature
 from abc import abstractmethod
 
 
