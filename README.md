@@ -20,6 +20,11 @@ This requires mongoDB to be set up and working with python using the PyMongo lib
   
 ```
 See the [MongoDB](https://docs.mongodb.com) documentation for guidance on setting it up.
+
+You will also require:
+- A working version of the latest build of [ChemDataExtractor](http://chemdataextractor.org/download) and all its dependencies
+- The modified [ChemDataExtractor_snowball package](https://github.com/cjcourt/chemdataextractor-snowball)
+
  
 
 
