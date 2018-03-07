@@ -17,7 +17,9 @@ class BaseRecord:
 
     @abstractmethod
     def records(self, compound):
-        """Return a list of record dicts"""
+        """Return a list of record dicts
+        :param compound: ChemDataExtractor Compound object
+        """
         return []
 
 

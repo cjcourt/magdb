@@ -15,8 +15,8 @@ import sys
 
 
 class Doc:
-    """ Document wrapper object containing all chemical records from ChemDataExtractor and document information
-        from CDE scrapers"""
+    """ Document wrapper object containing all chemical records
+    from ChemDataExtractor and document information from CDE scrapers"""
 
     def __init__(self):
         self.chemical_records = None
@@ -37,9 +37,12 @@ class Doc:
         """
         Add document information to records
 
-        :param r:
-        :return:
+        :param r: dictionary of data records
+        :type r: dict
+        :return: the updated records
         """
+        assert(isinstance(r, dict))
+
         r['Title'] = self.document_info.title
         r['Authors'] = self.document_info.authors
         r['DOI'] = self.document_info.doi
@@ -63,23 +66,29 @@ class Doc:
 
 
 class MagnetismDatabase:
-    def __init__(self, db_name, corpus_dir, record_types=None):
+    def __init__(self, db_name, corpus_dir):
         """
         :param db_name: Name of the MongoDb collection
+        :type db_name: str
         :param corpus_dir: Path to corpus of articles in XML/HTML format
-        :param record_types: Optional, which records data types to include within database, default all available
+        :type corpus_dir: str
         """
-        if record_types:
-            self.record_types = record_types
-        else:
-            self.record_types = [NeelTemperature(), CurieTemperature()]
+        self._record_types = [NeelTemperature(), CurieTemperature()]
 
         # Set up mongo client
-        self.client = MongoClient()
-        self.db = self.client[db_name]
+        self._client = MongoClient()
+        self._db = self._client[db_name]
 
         # Initiate
         self.from_files(corpus_dir)
+
+    @property
+    def database(self):
+        return self._db
+
+    @property
+    def record_types(self):
+        return self._record_types
 
     def save(self, data):
         """
@@ -87,8 +96,7 @@ class MagnetismDatabase:
         :param data: list of entry dicts
         :return:
         """
-        print("saving")
-        entries = self.db.posts
+        entries = self._db.posts
         entries.insert_many(data)
         return
 
@@ -113,9 +121,3 @@ class MagnetismDatabase:
                     continue
             counter += 1
         return
-
-
-
-
-
-

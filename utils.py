@@ -41,7 +41,12 @@ UNICODE_DEGREES_FAHRENHEIT = ['°F', 'F', '\u00b0F', '\u2109']
 
 
 def get_document_info(file):
-    """ Scrape document information using ChemDataExtractor Scrapers """
+    """
+    Scrape document information using ChemDataExtractor Scrapers
+    :param file: file path to target article
+    :type file: str
+    :return: list of dicts containing the document information
+    """
 
     if file.endswith('.html'):
         file_type = 'html'
@@ -77,7 +82,8 @@ def get_chemical_records(file):
     """
     get chemical records extracted from CDE-snowball, removing records that do not contain compound names
     :param file: path to file
-    :return:
+    :type file: str
+    :return: ChemDataExtractor records in list of dict format
     """
     f = open(file, 'rb')
     try:
@@ -89,18 +95,24 @@ def get_chemical_records(file):
             if compound.names is not None:
                 output_recs.append(compound)
 
+        f.close()
         return output_recs
     except Exception as e:
         print('File ' + file + ' could not be read. ' + 'Error: ' + str(e))
         traceback.print_exc(file=sys.stdout)
-    f.close()
+        f.close()
     return
 
 
-def normalise_temperature(nt):
-    """ Convert units of a Neel temperature measurement to Kelvin """
-    value = str(nt.value)
-    units = nt.units
+def normalise_temperature(input_temperature):
+    """ Convert units of a temperature measurement to Kelvin
+    :param input_temperature: The temperature to be normalised in Degrees
+    Celsius
+    :type input_temperature: ChemDataExtractor Record
+    :returns: Normalised temperature in Kelvin
+    """
+    value = str(input_temperature.value)
+    units = input_temperature.units
 
     if units is None:
         return value, units
@@ -160,7 +172,7 @@ def normalise_temperature(nt):
             temperature_flt = (5.0 / 9.0) * (float(temperature) - 32) + 273
             return str(temperature_flt), 'K'
         else:
-            print('Something went wrong', value, units)
+            print('Could not normalise:', value, units)
             return None, None
     else:
         print('UNKOWN FORMAT', value, units)
@@ -176,16 +188,20 @@ def exists(file):
 
 
 def detect_publisher(fstring):
-        """ Detect the publisher of a html file by searching for unique strings """
-        if b'<meta name="dc.Identifier" scheme="doi" content="10.1021/' in fstring:
-            return 'acs'
-        elif b'content="10.1039/' in fstring:
-            return 'rsc'
-        elif b'<link rel="canonical" href="http://www.sciencedirect.com/' in fstring:
-            return 'elsevier'
-        elif b'full-text-retrieval-response' in fstring:
-            return 'elsevier'
-        elif b'<meta content="10.1007/' in fstring or b'<meta content="https://link.springer.com' in fstring:
-            return 'springer'
-        else:
-            return None
+    """ Detect the publisher of a html file by searching for unique strings
+    :param fstring: document HTML or XML text
+    :type: byte string
+    :returns: publisher name as a unique string
+    """
+    if b'<meta name="dc.Identifier" scheme="doi" content="10.1021/' in fstring:
+        return 'acs'
+    elif b'content="10.1039/' in fstring:
+        return 'rsc'
+    elif b'<link rel="canonical" href="http://www.sciencedirect.com/' in fstring:
+        return 'elsevier'
+    elif b'full-text-retrieval-response' in fstring:
+        return 'elsevier'
+    elif b'<meta content="10.1007/' in fstring or b'<meta content="https://link.springer.com' in fstring:
+        return 'springer'
+    else:
+        return None
