@@ -60,8 +60,8 @@ class CurieTemperature(BaseRecord):
 
     def records(self, compound):
         """
-        Get all Curie temperature data from the CDE Compound to create database entry,
-            Normalise temperatures to Kelvin
+        Get all Curie temperature data from the CDE Compound to create database
+         entry, Normalise temperatures to Kelvin
         """
         if not compound.curie_temperatures:
             return []

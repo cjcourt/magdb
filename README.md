@@ -21,7 +21,13 @@ You will also require:
 Create a new database using the following:
 
 ```
-db = MagnetismDatabase(db_name, corpus_dir)
+from magdb import MagnetismDatabase
+
+corpus = 'path/to/corpus'
+db_name = 'db_test'
+
+# create the database
+db = MagnetismDatabase(db_name, corpus)
 
 ```
 The db_name is an arbitrary string name for the MongoDB collection.
