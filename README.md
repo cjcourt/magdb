@@ -1,8 +1,9 @@
-# magdb
+# MAGDB
 Tools for creating a MongoDB collection of materials property records from scientific documents. This system makes use
 of machine learning and semi-supervised natural language processing within the [ChemDataExtractor toolkit](http://chemdataextractor.org).
 
-**INSTALLATION NOTES***
+**INSTALLATION NOTES**
+
 The database creation tool has been designed using python 3.6.
 
 The toolkit requires MongoDB to be set up and working with python using the PyMongo library, available with pip.
@@ -18,6 +19,7 @@ You will also require:
 
 
 **USAGE:**
+
 Create a new database using the following:
 
 ```
