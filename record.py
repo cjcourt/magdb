@@ -74,7 +74,7 @@ class CurieTemperature(BaseRecord):
                 print(e)
                 normed_value, normed_units = None, None
 
-            entry = {'Type': 'Néel',
+            entry = {'Type': 'Curie',
                      'Names': compound.names,
                      'Extracted Value': ct.value,
                      'Extracted Units': ct.units,
