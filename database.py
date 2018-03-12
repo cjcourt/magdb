@@ -66,7 +66,7 @@ class Doc:
 
 
 class MagnetismDatabase:
-    def __init__(self, db_name, corpus_dir):
+    def __init__(self, db_name):
         """
         :param db_name: Name of the MongoDb collection
         :type db_name: str
@@ -78,9 +78,6 @@ class MagnetismDatabase:
         # Set up mongo client
         self._client = MongoClient()
         self._db = self._client[db_name]
-
-        # Initiate
-        self.from_files(corpus_dir)
 
     @property
     def database(self):
@@ -100,6 +97,11 @@ class MagnetismDatabase:
         entries.insert_many(data)
         return
 
+    def from_file(self, f):
+        d = Doc().from_file(f)
+        new_data = d.data(self.record_types)
+        return new_data
+
     def from_files(self, file_dir):
         """ Create database records for each file in the given directory """
         if not exists(file_dir):
@@ -110,8 +112,7 @@ class MagnetismDatabase:
             if filename.endswith(('.html', '.xml')):
                 try:
                     print('Processing', counter, "/", num_of_articles, ":", filename)
-                    d = Doc().from_file(file_dir + filename)
-                    new_data = d.data(self.record_types)
+                    new_data = self.from_file(file_dir + filename)
                     # save to database
                     if new_data:
                         self.save(new_data)
