@@ -1,20 +1,21 @@
 # magdb
-Tools for creating a MongoDB collection of materials property records from scientific documents. This system makes use
-of machine learning and semi-supervised natural language processing within the [ChemDataExtractor toolkit](http://chemdataextractor.org).
+Tools for creating a MongoDB collection of phase transitions records from scientific documents. This system makes use
+of machine learning and semi-supervised natural language processing within the [ChemDataExtractor toolkit](http://chemdataextractor.org)
+and the modified system using semi-supervised relationship extraction [CDESnowball](http://github.com/cjcourt/CDESnowball.git).
 
-**INSTALLATION NOTES***
+**INSTALLATION NOTES**
 The database creation tool has been designed using python 3.6.
 
 The toolkit requires MongoDB to be set up and working with python using the PyMongo library, available with pip.
 ```
   pip3 install pymongo
-
 ```
 See the [MongoDB](https://docs.mongodb.com) documentation for guidance on setting it up.
 
 You will also require:
+
 - A working version of the latest build of [ChemDataExtractor](http://chemdataextractor.org/download) and all its dependencies
-- The modified [ChemDataExtractor_snowball package](https://github.com/cjcourt/chemdataextractor-snowball)
+- The modified [ChemDataExtractor_snowball package](https://github.com/cjcourt/CDESnowball)
 
 
 **USAGE:**
@@ -26,8 +27,17 @@ from magdb import MagnetismDatabase
 corpus = 'path/to/corpus'
 db_name = 'db_test'
 
-# create the database
-db = MagnetismDatabase(db_name, corpus)
+# create the database, establish a mongodb connection
+db = MagnetismDatabase(db_name)
+
+# run on the corpus
+db.from_files(corpus)
+
+# read resulting database
+entries = db.database.posts
+
+for record in entries.find():
+    print(record)
 
 ```
 The db_name is an arbitrary string name for the MongoDB collection.
