@@ -33,6 +33,8 @@ class NeelTemperature(BaseRecord):
         """
         if not compound.neel_temperatures:
             return []
+        if compound.names is None:
+            return []
 
         records = []
         for nt in compound.neel_temperatures:
@@ -65,6 +67,9 @@ class CurieTemperature(BaseRecord):
         """
         if not compound.curie_temperatures:
             return []
+        if compound.names is None:
+            return []
+
 
         records = []
         for ct in compound.curie_temperatures:
