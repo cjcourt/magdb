@@ -5,13 +5,13 @@
 
 Utility functions for database creation
 """
-from CDESnowball.doc import Document
-from CDESnowball.scrape import Selector
-from CDESnowball.scrape.pub.acs import AcsHtmlDocument
-from CDESnowball.scrape.pub.rsc import RscHtmlDocument
-from CDESnowball.scrape.pub.elsevier import ElsevierHtmlDocument, \
+from cdesnowball.doc import Document
+from cdesnowball.scrape import Selector
+from cdesnowball.scrape.pub.acs import AcsHtmlDocument
+from cdesnowball.scrape.pub.rsc import RscHtmlDocument
+from cdesnowball.scrape.pub.elsevier import ElsevierHtmlDocument, \
     ElsevierXmlDocument
-from CDESnowball.scrape.pub.springer import SpringerHtmlDocument
+from cdesnowball.scrape.pub.springer import SpringerHtmlDocument
 import re
 import os
 import sys
